@@ -1,0 +1,14 @@
+[workspace]
+members = ["obfnstr", "obfnstr-example", "obfnstr-macros"]
+resolver = "3"
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+
+[workspace.dependencies]
+proc-macro2 = "1.0"
+syn = { version = "2.0", features = ["full", "visit-mut"] }
+quote = "1.0"
+obfnstr-macros = { path = "obfnstr-macros" }
+obfnstr = { path = "obfnstr" }

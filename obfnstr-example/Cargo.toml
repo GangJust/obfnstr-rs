@@ -1,0 +1,17 @@
+[package]
+name = "obfnstr-example"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+obfnstr.workspace = true
+obfnstr-macros.workspace = true
+
+[profile.release]
+lto = true          # LTO 允许编译器在链接时对整个程序进行优化
+strip = true        # 移除符号表和调试信息以减小二进制文件大小
+debug = false       # 禁用默认的 debug 信息
+codegen-units = 1   # 使用单一代码生成单元以提高优化效果
+incremental = false # 禁用增量编译以确保每次构建都是干净的
+opt-level = "z"     # 优化级别 "z" 侧重于减小二进制文件大小
+panic = "abort"     # 使用 "abort" 以减少二进制文件大小
