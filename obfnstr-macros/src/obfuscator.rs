@@ -1,5 +1,5 @@
 use syn::visit_mut::VisitMut;
-use syn::{parse_quote, visit_mut, Expr, Lit};
+use syn::{parse_quote, visit_mut, Attribute, Expr, Lit};
 
 pub struct Obfuscator;
 
@@ -10,6 +10,7 @@ impl VisitMut for Obfuscator {
             Expr::Lit(expr_lit) => {
                 if let Lit::Str(lit_str) = &expr_lit.lit {
                     let string = lit_str.value();
+                    // println!("Raw string: {}", string);
                     // This assumes `obfnstr::bytes_xor` is in scope and returns an iterator.
                     let obfuscated_bytes = obfnstr::bytes_xor(string.as_bytes());
                     // Replace the string literal with a call to the runtime deobfuscator.
@@ -22,5 +23,10 @@ impl VisitMut for Obfuscator {
             // If it's not a string literal, continue visiting its children.
             _ => visit_mut::visit_expr_mut(self, expr),
         }
+    }
+
+    fn visit_attribute_mut(&mut self, _i: &mut Attribute) {
+        // Do not visit attributes, which may contain doc comments.
+        // This prevents obfuscating strings inside `#[doc = "..."]`.
     }
 }
