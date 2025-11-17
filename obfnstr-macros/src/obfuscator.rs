@@ -19,10 +19,8 @@ impl VisitMut for Obfuscator {
                 }
             }
 
-            _ => {}
+            // If it's not a string literal, continue visiting its children.
+            _ => visit_mut::visit_expr_mut(self, expr),
         }
-
-        // If it's not a string literal, continue visiting its children.
-        visit_mut::visit_expr_mut(self, expr);
     }
 }
