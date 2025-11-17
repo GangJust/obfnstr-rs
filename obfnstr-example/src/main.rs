@@ -34,9 +34,18 @@ trait Animal {
 
 struct Dog;
 
+#[obfnstr]
 impl Animal for Dog {
-    #[obfnstr]
     fn baby_name(&self) -> String {
         "Spot"
+    }
+}
+
+struct Good;
+
+#[obfnstr]
+impl Good {
+    fn name() -> String {
+        "good"
     }
 }

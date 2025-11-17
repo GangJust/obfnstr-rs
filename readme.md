@@ -6,7 +6,7 @@ Why as much as possible? Because macro expressions are difficult to handle.
 
 ## Example
 
-When a fn is marked with `#[obfstr]`, the string expression appearing in the fn body will be obfuscated.
+When a fn is marked with `#[obfnstr]`, the string expression appearing in the fn body will be obfuscated.
 
 ```rust
 #[obfnstr]
